@@ -1,3 +1,25 @@
+.weather-description{
+  font-size: 1rem;
+}
+
+h2{
+  font-size: 3rem;
+}
+
+.text-lbl{
+  font-size: 1rem;
+  color:#01FF70;
+}
+
+.temp{
+  vertical-align: middle;
+  padding-top: 15px;
+}
+
 .card{
-  width: 100vh;
+  background-color:#01FF70;
+}
+
+.fa-plus{
+  color:#01FF70;
 }

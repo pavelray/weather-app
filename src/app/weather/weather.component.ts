@@ -53,10 +53,13 @@ export class WeatherComponent implements OnInit {
         this.weatherClass = 'fa-cloud';
       }
       if (this.currentLocationWeather.weather[0].main === 'Rain') {
-        this.weatherClass = 'fa-umbrella';
+        this.weatherClass = 'fa-cloud-showers-heavy';
       }
       if (this.currentLocationWeather.weather[0].main === 'Mist') {
-        this.weatherClass = 'fa-moon';
+        this.weatherClass = 'fa-water';
+      }
+      if (this.currentLocationWeather.weather[0].main === 'Drizzle') {
+        this.weatherClass = 'fa-cloud-rain';
       }
     });
   }

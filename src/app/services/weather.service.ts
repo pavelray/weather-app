@@ -9,7 +9,7 @@ export class WeatherService {
   constructor(private http: HttpClient) { }
 
   getWeatherByCity(city: string) {
-    return this.http.get(apiURL + city + apiKEY);
+    return this.http.get(apiURL + `q=${city}` + apiKEY);
   }
   getWeatherLocation(lat,long) {
     return this.http.get(apiURL + `lat=${lat}&lon=${long}` + apiKEY);
