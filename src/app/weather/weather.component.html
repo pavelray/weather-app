@@ -1,6 +1,7 @@
 <label><span><i class="fa fa-map-marker"></i></span> Current Location</label>
 <div class="card">
-  <div class="card-body">
+  <loading *ngIf="!currentLocationWeather"></loading>
+  <div class="card-body" *ngIf="currentLocationWeather">
     <div class="row">
         <div class="col-md-12"><h3>{{currentLocationWeather?.name}}</h3></div>
         <div class="col-md-6">
@@ -20,4 +21,5 @@
         </div>
     </div>
   </div>
+
 </div>
