@@ -18,6 +18,7 @@ h2{
 
 .card{
   background-color:#01FF70;
+  min-width: 300px;
 }
 
 .fa-plus{

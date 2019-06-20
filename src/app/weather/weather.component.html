@@ -1,29 +1,30 @@
 <label class="text-lbl"><span><i class="fa fa-map-marker"></i></span> Current Location</label>
 <div class="card">
   <div class="card-body">
+    <loading *ngIf="!currentLocationWeather"></loading>
     <div class="row p-3">
-  <loading *ngIf="!currentLocationWeather"></loading>
-  <div class="card-body" *ngIf="currentLocationWeather">
-    <div class="row">
-        <div class="col-md-12"><h3>{{currentLocationWeather?.name}}</h3></div>
-        <div class="col-md-6">
-          <h2><i class="fas" [ngClass]="weatherClass"></i></h2>
-          <label class="weather-description">{{currentLocationWeather?.weather[0].description | titlecase}}</label>
-        </div>
-        <div class="col-md-6 temp">
-          <h2>{{(currentLocationWeather?.main.temp-273.15)|number}}<span>&#8451;</span></h2>
-        </div>
-    </div>
-    <div class="row p-3">
-        <div class="col-md-6">
-          <h5><span>Max: </span>{{(currentLocationWeather?.main.temp_max-273.15)|number}}<span>&#8451;</span></h5>
-        </div>
-        <div class="col-md-6">
-          <h5><span>Min: </span>{{(currentLocationWeather?.main.temp_min-273.15)|number}}<span>&#8451;</span></h5>
-        </div>
+    <div class="card-body" *ngIf="currentLocationWeather">
+      <div class="row">
+          <div class="col-md-12"><h3>{{currentLocationWeather?.name}}</h3></div>
+          <div class="col-md-6">
+            <h2><i class="fas" [ngClass]="weatherClass"></i></h2>
+            <label class="weather-description">{{currentLocationWeather?.weather[0].description | titlecase}}</label>
+          </div>
+          <div class="col-md-6 temp">
+            <h2>{{(currentLocationWeather?.main.temp-273.15)|number}}<span>&#8451;</span></h2>
+          </div>
+      </div>
+      <div class="row p-3">
+          <div class="col-md-6">
+            <h5><span>Max: </span>{{(currentLocationWeather?.main.temp_max-273.15)|number}}<span>&#8451;</span></h5>
+          </div>
+          <div class="col-md-6">
+            <h5><span>Min: </span>{{(currentLocationWeather?.main.temp_min-273.15)|number}}<span>&#8451;</span></h5>
+          </div>
+      </div>
     </div>
   </div>
-
+  </div>
 </div>
 <br/>
 <label class="add-location"><span><i class="fas fa-plus"></i></span></label><br/>
