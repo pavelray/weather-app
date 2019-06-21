@@ -49,6 +49,7 @@ export class WeatherComponent implements OnInit {
   getWeatherData(lat, long) {
     this.service.getWeatherLocation(this.lat, this.long).subscribe(result => {
       this.currentLocationWeather = result;
+      
       this.weatherClass = this.selectWeatherLogo(this.currentLocationWeather.weather[0].main);
     });
   }
@@ -56,7 +57,7 @@ export class WeatherComponent implements OnInit {
   getWeatherByCity(cityName) {
     this.service.getWeatherByCity(cityName).subscribe(result => {
     this.weatherData = result;
-
+    console.log(this.weatherData);
     const weather: WeatherData  = {
       temp : this.weatherData.main.temp,
       maxTemp: this.weatherData.main.temp_max,
@@ -94,6 +95,9 @@ export class WeatherComponent implements OnInit {
     }
     if (type === 'Haze') {
       return 'fa-smog';
+    }
+    if (type === 'Clear') {
+      return 'fa-sun';
     }
   }
 
