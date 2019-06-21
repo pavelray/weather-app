@@ -5,7 +5,7 @@
     <div class="row p-3">
     <div class="card-body" *ngIf="currentLocationWeather">
       <div class="row">
-          <div class="col-md-12"><h3>{{currentLocationWeather?.name}}</h3></div>
+          <div class="col-md-12"><h3 class="animated tada">{{currentLocationWeather?.name}}</h3></div>
           <div class="col-md-6">
             <h2><i class="fas" [ngClass]="weatherClass"></i></h2>
             <label class="weather-description">{{currentLocationWeather?.weather[0].description | titlecase}}</label>
@@ -27,7 +27,49 @@
   </div>
 </div>
 <br/>
-<label class="add-location"><span><i class="fas fa-plus"></i></span></label><br/>
-<label class="text-lbl"><span class="text-muted">Add other location</span></label>
+<label class="text-lbl"><span class="text-muted">Add other location?</span></label>
+<br/>
+<a href="#open-modal" (click)="openModal()">
+    <label class="add-location"><span><i class="fas fa-plus"></i></span></label><br/>
+</a>
+<div class="row" *ngIf="otherLocation">
+  <div class="col-md-12">
+    <div class="row p-3 other-location" *ngFor="let city of otherLocation">
+        <div class="col-md-6">
+            <i class="fas" [ngClass]="city.logo"></i>
+            <span style="padding-left:15px ">{{(city?.temp-273.15)|number}}&#8451;</span>
+            <label class="text-sml">{{city?.description | titlecase}}</label>
+        </div>
+        <div class="col-md-4">
+            {{city?.city}}
+        </div>
+        <div class="col-md-2">
+            <i class="fas fa-trash-alt" (click)="remove(city)"></i>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="open-modal" class="modal-window" [ngStyle]='{display:display}'>
+    <div>
+      <a href="#" title="Close" class="modal-close"><i class="fas fa-times"></i></a>
+      <input type="text" #city class="other-location-input" value="" placeholder="Add New Location" (keyup.enter)="addNewLocationWeather(city)"/>
+    </div>
+</div>
+
+
 
 

@@ -1,3 +1,4 @@
+import { WeatherData } from './../utilities/weather-data';
 import { WeatherService } from './../services/weather.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -10,10 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WeatherComponent implements OnInit {
   currentLocationWeather: any;
+  otherLocation = [];
+  weatherData: any;
   weatherClass: any;
   geolocationPosition: any;
   lat: number;
   long: number;
+  display: string;
   constructor(private service: WeatherService) { }
 
   ngOnInit() {
@@ -23,8 +27,6 @@ export class WeatherComponent implements OnInit {
               this.geolocationPosition = position,
               this.lat = position.coords.latitude;
               this.long = position.coords.longitude;
-              console.log(this.lat);
-              console.log(this.long);
               this.getWeatherData(this.lat, this.long);
           },
           error => {
@@ -41,26 +43,64 @@ export class WeatherComponent implements OnInit {
               }
           }
       );
-
     }
   }
 
   getWeatherData(lat, long) {
     this.service.getWeatherLocation(this.lat, this.long).subscribe(result => {
       this.currentLocationWeather = result;
-      console.log(this.currentLocationWeather);
-      if (this.currentLocationWeather.weather[0].main === 'Clouds') {
-        this.weatherClass = 'fa-cloud';
-      }
-      if (this.currentLocationWeather.weather[0].main === 'Rain') {
-        this.weatherClass = 'fa-cloud-showers-heavy';
-      }
-      if (this.currentLocationWeather.weather[0].main === 'Mist') {
-        this.weatherClass = 'fa-water';
-      }
-      if (this.currentLocationWeather.weather[0].main === 'Drizzle') {
-        this.weatherClass = 'fa-cloud-rain';
-      }
+      this.weatherClass = this.selectWeatherLogo(this.currentLocationWeather.weather[0].main);
     });
+  }
+
+  getWeatherByCity(cityName) {
+    this.service.getWeatherByCity(cityName).subscribe(result => {
+    this.weatherData = result;
+
+    const weather: WeatherData  = {
+      temp : this.weatherData.main.temp,
+      maxTemp: this.weatherData.main.temp_max,
+      minTemp: this.weatherData.main.temp_max,
+      city: this.weatherData.name,
+      description: this.weatherData.weather[0].description,
+      logo: this.selectWeatherLogo(this.weatherData.weather[0].main)
+    };
+      this.otherLocation.push(weather);
+    });
+  }
+
+  addNewLocationWeather(city) {
+    this.getWeatherByCity(city.value);
+    this.display = 'none';
+    city.value = '';
+  }
+
+  openModal() {
+    this.display = 'block';
+  }
+
+  selectWeatherLogo(type) {
+    if (type === 'Clouds') {
+      return 'fa-cloud';
+    }
+    if (type === 'Rain') {
+      return 'fa-cloud-showers-heavy';
+    }
+    if (type === 'Mist') {
+      return 'fa-water';
+    }
+    if (type === 'Drizzle') {
+      return 'fa-cloud-rain';
+    }
+    if (type === 'Haze') {
+      return 'fa-smog';
+    }
+  }
+
+  remove(city) {
+    const index = this.otherLocation.findIndex(x => x.city === city.city);
+    console.log(this.otherLocation);
+    this.otherLocation.slice(index, 1);
+    console.log(this.otherLocation);
   }
 }
