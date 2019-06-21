@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This is a simple weather app. It will show the user current location's weather and user can add other locations also. In this application I have used [Open Weather](https://openweathermap.org/) api , to get the weather data. [Animate CSS](https://daneden.github.io/animate.css/) is used for simple animation and [Font Awesome](https://fontawesome.com) is used for weathe widget. 
 But we can do lot more with this app. I have mentioned few points. Please feel free to add any usefull funcationalities into this project. 
 
-![Weather-App](https://raw.githubusercontent.com/pavelray/todo-redux/master/src/Weather-App.jpg)
+![Weather-App](https://raw.githubusercontent.com/pavelray/weather-app/master/src/Weather-App.jpg)
 
 # Functionality
 1. User's location access and showing weather condition.
